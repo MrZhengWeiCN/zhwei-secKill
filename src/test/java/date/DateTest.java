@@ -77,4 +77,9 @@ public class DateTest {
 		cal.set(Calendar.HOUR_OF_DAY, 24);
 		return cal.getTime();
 	}
+	
+	@Test
+	public void testInt(){
+		System.out.println(Integer.valueOf(null));
+	}
 }
