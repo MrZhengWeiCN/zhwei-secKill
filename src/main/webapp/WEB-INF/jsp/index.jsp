@@ -258,13 +258,13 @@ body {
 			<div class="bg_1_pp">
 				<div class="top_tab">
 					<div class="top_times1 on" id="top_times1">
-						<p>10:00</p>
+						<p><fmt:formatDate value="${products1.killdate }" pattern="HH:mm:ss"/></p>
 					</div>
 					<div class="top_times2" id="top_times2">
-						<p>14:00</p>
+						<p><fmt:formatDate value="${products2.killdate }" pattern="HH:mm:ss"/></p>
 					</div>
 					<div class="top_times3" id="top_times3">
-						<p>22:00</p>
+						<p><fmt:formatDate value="${products3.killdate }" pattern="HH:mm:ss"/></p>
 					</div>
 
 					<div style="display: block;" class="top_cont" id="top_cont1">
@@ -315,7 +315,7 @@ body {
 									秒杀价：￥<b>${products3.killprice/100 }</b> 市场价：<span>${products3.normalprice/100 }</span>
 								</div>
 								<div class="cp_btn_dd" id="btn3">
-									<span id="times2">0小时35分14秒</span>
+									<span id="times2">0小时35分14秒</span><span id="image3" style="display: none">/createOrder.html?id=${products3.id }</span>
 								</div> <abbr style="display: none"><fmt:formatDate value="${products3.killdate }" pattern="yyyy/MM/dd HH:mm:ss"/></abbr>
 								<div class="" id="shande_3"></div>
 							</li>
@@ -353,7 +353,9 @@ body {
 			var time1 = document.getElementsByTagName('abbr')[0].innerHTML;
 			var date1 = new Date(time1);
 			var time2 = document.getElementsByTagName('abbr')[1].innerHTML;
+			var date2 = new Date(time2);
 			var time3 = document.getElementsByTagName('abbr')[2].innerHTML;
+			var date3 = new Date(time3);
 			//一个小时后过期
             if (date_time > new Date(date1.getTime()+1000*60*50)) {
 				<!--图片遮住，购买按钮改变-->
@@ -361,13 +363,13 @@ body {
                 document.getElementById("btn1").className = "cp_btn_js";
                 document.getElementById("btn1").innerHTML = "<a href='http://smzdqiang.com/dataoke/' target='_blank'>&nbsp;<span id='times' style='display:none;'>1</span></a>";
             }
-            if (date_time > new Date(time2)) {
+            if (date_time > new Date(date2.getTime()+1000*60*50)) {
                 document.getElementById("shande_2").className = "cp_shade2";
                 document.getElementById("btn2").className = "cp_btn_js";
                 document.getElementById("btn2").innerHTML = "<a href='http://smzdqiang.com/dataoke/' target='_blank'>&nbsp;<span id='times1' style='display:none;'>1</span></a>";
 
             }
-            if (date_time > new Date(time3)+1000*60*60) {
+            if (date_time > new Date(date3.getTime()+1000*60*50)) {
                 document.getElementById("shande_3").className = "cp_shade3";
                 document.getElementById("btn3").className = "cp_btn_js";
                 document.getElementById("btn3").innerHTML = "<a href='http://smzdqiang.com/dataoke/' target='_blank'>&nbsp;<span id='times2' style='display:none;'>1</span></a>";
@@ -418,6 +420,7 @@ body {
                     }
                 }
             }
+            var image3 = document.getElementById("image3").innerHTML;
             for (var l = 0; l < endcount; l++) {
                 if (leftsecond[l] <= 0) {
 					//各个商品秒杀开始
@@ -431,7 +434,7 @@ body {
                     }
                     else if (l == 2) {
                         document.getElementById("btn3").className = "cp_btn_ks";
-                        document.getElementById("btn3").innerHTML = "<a href='http://www.smzdqiang.com/' target='_blank'>&nbsp;<span id='times2' style='display:none;'>1</span></a>";
+                        document.getElementById("btn3").innerHTML = "<a href='"+image3+"' target='_blank'>&nbsp;<span id='times2' style='display:none;'>1</span></a>";
                     }
                 }
             }
