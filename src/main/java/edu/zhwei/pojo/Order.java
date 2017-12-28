@@ -2,6 +2,8 @@ package edu.zhwei.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Order {
     private Integer orderid;
 

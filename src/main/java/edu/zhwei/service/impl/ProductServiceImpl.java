@@ -33,4 +33,11 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> list = productMapper.selectByExample(example);
 		return list;
 	}
+
+	//根据Id查询商品
+	@Override
+	public Product findProduct(Integer id) {
+		Product product = productMapper.selectByPrimaryKey(id);
+		return product;
+	}
 }

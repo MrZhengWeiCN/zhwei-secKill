@@ -24,6 +24,7 @@ public class ProductController {
 		return "addSuccess";
 	}
 	
+	//展示参加秒杀活动的商品
 	@RequestMapping("/showProduct")
 	@ResponseBody
 	public String showProduct(){
