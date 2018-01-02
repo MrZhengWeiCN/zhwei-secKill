@@ -1,5 +1,7 @@
 package edu.zhwei.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +29,16 @@ public class OrderController {
 	@RequestMapping("/createOrder")
 	public String toOrderPage(Integer id, Model model) {
 		boolean canOrder = jedisClient.canOrder(id);
-		if (canOrder) {
-			Product product = productService.findProduct(id);
+		Product product = productService.findProduct(id);
+		//防止有人提前进入下单页面
+		long killdate = product.getKilldate().getTime();
+		long currentTimeMillis = System.currentTimeMillis();
+		boolean rightTime = currentTimeMillis>killdate?true:false;
+		if (canOrder&&rightTime) {
 			model.addAttribute("product", product);
 			return "order";
+		}else if (!rightTime) {
+			return "wrongTime";
 		} else {
 			return "ended";
 		}
